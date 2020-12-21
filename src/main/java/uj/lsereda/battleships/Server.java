@@ -1,9 +1,11 @@
 package uj.lsereda.battleships;
 
-import uj.lsereda.battleships.view.TerminalView;
+import uj.lsereda.battleships.view.ViewFactory;
+import uj.lsereda.battleships.view.ViewType;
 
-import java.io.IOException;
-import java.net.*;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 
 public class Server implements Runnable { //TODO
     private static Server instance;
@@ -39,7 +41,9 @@ public class Server implements Runnable { //TODO
     public void run() {
         try {
             var acceptedSocket = socket.accept();
-            var view = new TerminalView();
+            var view = ViewFactory.getView(ViewType.TERMINAL);
+            var bufferedReader = new BufferedReader(new InputStreamReader(acceptedSocket.getInputStream()));
+            var bufferedWriter = new BufferedWriter(new OutputStreamWriter(acceptedSocket.getOutputStream()));
             //TODO start session
             //TODO run thread
         } catch (Exception ex) {

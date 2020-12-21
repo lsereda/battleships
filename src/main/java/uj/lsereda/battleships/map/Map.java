@@ -4,19 +4,13 @@ import java.util.List;
 
 public class Map { //TODO
     private final List<Cell> cells;
-    private final MapIterator iterator;
 
-    public Map(List<Cell> cells, MapIterator iterator) {
+    public Map(List<Cell> cells) {
         this.cells = cells;
-        this.iterator = iterator;
     }
 
     public List<Cell> getCells() {
         return cells;
-    }
-
-    public MapIterator getIterator() {
-        return iterator;
     }
 
     @Override

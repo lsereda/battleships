@@ -1,8 +1,9 @@
 package uj.lsereda.battleships;
 
-import uj.lsereda.battleships.view.TerminalView;
+import uj.lsereda.battleships.view.ViewFactory;
+import uj.lsereda.battleships.view.ViewType;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class Client { //TODO
@@ -28,7 +29,9 @@ public class Client { //TODO
     public void start() {
         try {
             var socket = new Socket(host, port);
-            var view = new TerminalView();
+            var view = ViewFactory.getView(ViewType.TERMINAL);
+            var bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            var bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             //TODO start session
             //TODO run thread
             System.out.println("Client started");
