@@ -1,5 +1,7 @@
 package uj.lsereda.battleships;
 
+import uj.lsereda.battleships.view.TerminalView;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -26,6 +28,7 @@ public class Client { //TODO
     public void start() {
         try {
             var socket = new Socket(host, port);
+            var view = new TerminalView();
             //TODO start session
             //TODO run thread
             System.out.println("Client started");

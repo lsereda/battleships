@@ -1,5 +1,7 @@
 package uj.lsereda.battleships;
 
+import uj.lsereda.battleships.view.TerminalView;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -31,13 +33,13 @@ public class Server implements Runnable { //TODO
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     @Override
     public void run() {
         try {
             var acceptedSocket = socket.accept();
+            var view = new TerminalView();
             //TODO start session
             //TODO run thread
         } catch (Exception ex) {
