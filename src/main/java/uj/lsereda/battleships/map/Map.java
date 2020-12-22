@@ -1,27 +1,28 @@
 package uj.lsereda.battleships.map;
 
-import java.util.List;
+public class Map {
+    private final Cell[][] cells;
 
-public class Map { //TODO
-    private final List<Cell> cells;
-
-    public Map(List<Cell> cells) {
+    public Map(Cell[][] cells) {
         this.cells = cells;
     }
 
-    public List<Cell> getCells() {
+    public Cell[][] getCells() {
         return cells;
+    }
+
+    public MapIterator iterator(CellType cellType) {
+        return new MapIterator(this, cellType);
     }
 
     @Override
     public String toString() {
-        var sortedCells = (Cell[]) cells.stream().sorted().toArray();
         var builder = new StringBuilder();
-        for (int i = 0; i < sortedCells.length; i++) {
-            builder.append(sortedCells[i]);
-            if (i % 10 == 0 && i > 1) {
-                builder.append("\n");
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j ++) {
+                builder.append(cells[i][j]);
             }
+            builder.append("\n");
         }
         return builder.toString();
     }

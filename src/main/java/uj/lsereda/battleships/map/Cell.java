@@ -1,24 +1,24 @@
 package uj.lsereda.battleships.map;
 
 public class Cell implements Comparable<Cell> { //TODO
-    private final Value value;
+    private final CellType cellType;
     private final int x;
     private final int y;
 
-    public Cell(Value value, int x, int y) {
-        this.value = value;
+    public Cell(CellType cellType, int x, int y) {
+        this.cellType = cellType;
         this.x = x;
         this.y = y;
     }
 
     public Cell(Cell cell) {
-        this.value = cell.value;
+        this.cellType = cell.cellType;
         this.x = cell.x;
         this.y = cell.y;
     }
 
-    public Value getValue() {
-        return value;
+    public CellType getCellType() {
+        return cellType;
     }
 
     public int getX() {

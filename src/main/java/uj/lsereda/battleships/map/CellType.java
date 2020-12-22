@@ -1,6 +1,6 @@
 package uj.lsereda.battleships.map;
 
-public enum Value { //TODO
+public enum CellType { //TODO
     WATER,
     SHIP,
     MISS,
