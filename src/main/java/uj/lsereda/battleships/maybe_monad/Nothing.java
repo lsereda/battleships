@@ -28,6 +28,11 @@ public class Nothing<T> implements Maybe<T> {
     }
 
     @Override
+    public T getVal() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "Nothing";
     }
