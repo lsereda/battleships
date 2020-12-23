@@ -44,8 +44,13 @@ public class Server implements Runnable { //TODO
             var view = ViewFactory.getView(ViewType.TERMINAL);
             var bufferedReader = new BufferedReader(new InputStreamReader(acceptedSocket.getInputStream()));
             var bufferedWriter = new BufferedWriter(new OutputStreamWriter(acceptedSocket.getOutputStream()));
-            //TODO start session
-            //TODO run thread
+            //TODO add rest of components
+            var session = new Session.SessionBuilder()
+                    .withSocket(acceptedSocket)
+                    .withReader(bufferedReader)
+                    .withWriter(bufferedWriter)
+                    .build();
+            new Thread(session, "server").start();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

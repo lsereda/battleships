@@ -32,8 +32,13 @@ public class Client { //TODO
             var view = ViewFactory.getView(ViewType.TERMINAL);
             var bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             var bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            //TODO start session
-            //TODO run thread
+            //TODO add rest of components
+            var session = new Session.SessionBuilder()
+                    .withSocket(socket)
+                    .withReader(bufferedReader)
+                    .withWriter(bufferedWriter)
+                    .build();
+            new Thread(session, "client").start();
             System.out.println("Client started");
         } catch (IOException ex) {
             ex.printStackTrace();

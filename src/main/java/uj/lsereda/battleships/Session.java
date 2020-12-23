@@ -24,13 +24,13 @@ public class Session implements Runnable { //TODO finish
     }
 
     @Override
-    public void run() { //TODO
-        while(true) {
-
+    public void run() { //TODO implement
+        while (true) {
+            System.out.println("test");
         }
     }
 
-    private static class SessionBuilder {
+    public static class SessionBuilder {
         private Socket socket;
         private GameState state;
         private BufferedReader reader;
@@ -74,6 +74,5 @@ public class Session implements Runnable { //TODO finish
         public Session build() {
             return new Session(this);
         }
-
     }
 }
