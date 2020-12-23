@@ -1,6 +1,9 @@
 package uj.lsereda.battleships.map;
 
+import java.util.Objects;
+
 public class Cell implements Comparable<Cell> { //TODO
+
     private final CellType cellType;
     private final int x;
     private final int y;
@@ -38,6 +41,21 @@ public class Cell implements Comparable<Cell> { //TODO
         } else {
             return 1;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return x == cell.x &&
+                y == cell.y &&
+                cellType == cell.cellType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cellType, x, y);
     }
 
     public Cell clone() {
