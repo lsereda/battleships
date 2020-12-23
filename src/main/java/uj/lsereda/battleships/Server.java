@@ -1,11 +1,13 @@
 package uj.lsereda.battleships;
 
+import uj.lsereda.battleships.user_command_receiver.ScannerCommandReceiver;
 import uj.lsereda.battleships.view.ViewFactory;
 import uj.lsereda.battleships.view.ViewType;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
+import java.util.Scanner;
 
 public class Server implements Runnable { //TODO
     private static Server instance;
@@ -44,11 +46,13 @@ public class Server implements Runnable { //TODO
             var view = ViewFactory.getView(ViewType.TERMINAL);
             var bufferedReader = new BufferedReader(new InputStreamReader(acceptedSocket.getInputStream()));
             var bufferedWriter = new BufferedWriter(new OutputStreamWriter(acceptedSocket.getOutputStream()));
+            var receiver = new ScannerCommandReceiver(new Scanner(System.in));
             //TODO add rest of components
             var session = new Session.SessionBuilder()
                     .withSocket(acceptedSocket)
                     .withReader(bufferedReader)
                     .withWriter(bufferedWriter)
+                    .withReceiver(receiver)
                     .build();
             new Thread(session, "server").start();
         } catch (Exception ex) {

@@ -2,11 +2,11 @@ package uj.lsereda.battleships.user_command_receiver;
 
 import java.util.Scanner;
 
-public class ScannerUserCommandReceiver implements IUserCommandReceiver {
+public class ScannerCommandReceiver implements CommandReceiver {
 
     private final Scanner scan;
 
-    public ScannerUserCommandReceiver(Scanner scan) {
+    public ScannerCommandReceiver(Scanner scan) {
         this.scan = scan;
     }
 

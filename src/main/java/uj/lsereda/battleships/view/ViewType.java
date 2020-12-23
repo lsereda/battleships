@@ -6,13 +6,13 @@ public enum ViewType {
     TERMINAL(TerminalView::new),
     EMPTY(EmptyView::new);
 
-    private final Supplier<IView> constructor;
+    private final Supplier<View> constructor;
 
-    ViewType(Supplier<IView> constructor) {
+    ViewType(Supplier<View> constructor) {
         this.constructor = constructor;
     }
 
-    public Supplier<IView> getConstructor() {
+    public Supplier<View> getConstructor() {
         return constructor;
     }
 }
