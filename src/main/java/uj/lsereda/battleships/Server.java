@@ -1,5 +1,6 @@
 package uj.lsereda.battleships;
 
+import uj.lsereda.battleships.map.Map;
 import uj.lsereda.battleships.user_command_receiver.ScannerCommandReceiver;
 import uj.lsereda.battleships.view.ViewFactory;
 import uj.lsereda.battleships.view.ViewType;
@@ -47,12 +48,14 @@ public class Server implements Runnable { //TODO
             var bufferedReader = new BufferedReader(new InputStreamReader(acceptedSocket.getInputStream()));
             var bufferedWriter = new BufferedWriter(new OutputStreamWriter(acceptedSocket.getOutputStream()));
             var receiver = new ScannerCommandReceiver(new Scanner(System.in));
+            var myMap = Map.fromFile(mapPath);
             //TODO add rest of components
             var session = new Session.SessionBuilder()
                     .withSocket(acceptedSocket)
                     .withReader(bufferedReader)
                     .withWriter(bufferedWriter)
                     .withReceiver(receiver)
+                    .withMyMap(myMap)
                     .build();
             new Thread(session, "server").start();
         } catch (Exception ex) {
