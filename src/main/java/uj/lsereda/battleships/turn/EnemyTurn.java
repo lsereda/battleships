@@ -39,7 +39,7 @@ public class EnemyTurn implements GameTurn {
             var iterator = session.getMyMap().iterator(CellType.SHIP);
             if (!iterator.hasNext()) {
                 session.setShutdown(true);
-                session.getView().displayMessage("YOU LOSE");
+                session.getView().displayMessage("YOU LOSE!!!");
                 return String.format("%c%d WIN", x, y);
             }
             while (iterator.hasNext()) {

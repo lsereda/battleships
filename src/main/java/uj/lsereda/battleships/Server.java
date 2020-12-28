@@ -35,8 +35,6 @@ public class Server implements Runnable {
     public void start() {
         try {
             new Thread(instance, "Server").start();
-            System.out.println("Server started on address " +
-                    address + " and port " + port);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -45,7 +43,6 @@ public class Server implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("Dupa");
             var acceptedSocket = socket.accept();
             var view = ViewFactory.getView(ViewType.TERMINAL);
             var bufferedReader = new BufferedReader(new InputStreamReader(acceptedSocket.getInputStream()));

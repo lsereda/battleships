@@ -33,7 +33,7 @@ public class WaitingForResponse implements GameTurn {
                 break;
             case "WIN":
                 session.setShutdown(true);
-                view.displayMessage("YOU WIN");
+                view.displayMessage("YOU WIN!!!");
                 break;
         }
 
