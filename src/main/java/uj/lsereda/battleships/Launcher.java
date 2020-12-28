@@ -19,11 +19,9 @@ public class Launcher {
                 var host = cmd.getOptionValue("host");
                 var client = Client.getInstance(port, mapPath, host);
                 client.start();
-                System.out.println(client);
             } else {
                 var server = Server.getInstance(findAddress(), port, mapPath);
                 server.start();
-                System.out.println(server);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

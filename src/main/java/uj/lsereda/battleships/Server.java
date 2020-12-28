@@ -35,7 +35,8 @@ public class Server implements Runnable {
     public void start() {
         try {
             new Thread(instance, "Server").start();
-            System.out.println("Running server at address: " + address + ", port: " + port);
+            System.out.println("Server started on address " +
+                    address + " and port " + port);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -44,6 +45,7 @@ public class Server implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println("Dupa");
             var acceptedSocket = socket.accept();
             var view = ViewFactory.getView(ViewType.TERMINAL);
             var bufferedReader = new BufferedReader(new InputStreamReader(acceptedSocket.getInputStream()));
@@ -53,16 +55,18 @@ public class Server implements Runnable {
             var enemyMap = Map.foggedMap();
 
             var session = new Session.SessionBuilder()
-                    .withSocket(acceptedSocket)
                     .withReader(bufferedReader)
                     .withWriter(bufferedWriter)
                     .withReceiver(receiver)
                     .withMyMap(myMap)
                     .withEnemyMap(enemyMap)
+                    .withView(view)
                     .build();
             var state = new EnemyTurn(session);
             session.setState(state);
 
+            session.getView().displayMessage("Server started on address " +
+                    address + " and port " + port);
             new Thread(session, "server").start();
         } catch (Exception ex) {
             ex.printStackTrace();

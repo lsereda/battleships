@@ -6,29 +6,29 @@ import uj.lsereda.battleships.turn.GameTurn;
 import uj.lsereda.battleships.turn.MyTurn;
 import uj.lsereda.battleships.turn.WaitingForResponse;
 import uj.lsereda.battleships.user_command_receiver.CommandReceiver;
+import uj.lsereda.battleships.view.View;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.net.Socket;
 
 public class Session implements Runnable {
-    private final Socket socket;
-    private GameTurn state;
     private final BufferedReader reader;
     private final BufferedWriter writer;
     private final Map myMap;
     private final Map enemyMap;
     private final CommandReceiver receiver;
+    private final View view;
+    private GameTurn state;
     private boolean shutdown = false;
 
     private Session(SessionBuilder builder) {
-        this.socket = builder.socket;
         this.reader = builder.reader;
         this.writer = builder.writer;
         this.myMap = builder.myMap;
         this.enemyMap = builder.enemyMap;
         this.receiver = builder.receiver;
+        this.view = builder.view;
     }
 
     @Override
@@ -73,24 +73,23 @@ public class Session implements Runnable {
         return receiver;
     }
 
+    public View getView() {
+        return view;
+    }
+
     public void setShutdown(boolean shutdown) {
         this.shutdown = shutdown;
     }
 
     public static class SessionBuilder {
-        private Socket socket;
         private BufferedReader reader;
         private BufferedWriter writer;
         private Map myMap;
         private Map enemyMap;
         private CommandReceiver receiver;
+        private View view;
 
         public SessionBuilder() {
-        }
-
-        public SessionBuilder withSocket(Socket socket) {
-            this.socket = socket;
-            return this;
         }
 
         public SessionBuilder withReader(BufferedReader reader) {
@@ -115,6 +114,11 @@ public class Session implements Runnable {
 
         public SessionBuilder withReceiver(CommandReceiver receiver) {
             this.receiver = receiver;
+            return this;
+        }
+
+        public SessionBuilder withView(View view) {
+            this.view = view;
             return this;
         }
 

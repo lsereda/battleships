@@ -39,20 +39,19 @@ public class Client {
             var receiver = new ScannerCommandReceiver(new Scanner(System.in));
             var myMap = Map.fromFile(mapPath);
             var enemyMap = Map.foggedMap();
-
             var session = new Session.SessionBuilder()
-                    .withSocket(socket)
                     .withReader(bufferedReader)
                     .withWriter(bufferedWriter)
                     .withReceiver(receiver)
                     .withMyMap(myMap)
                     .withEnemyMap(enemyMap)
+                    .withView(view)
                     .build();
             var state = new MyTurn(session);
             session.setState(state);
 
+            session.getView().displayMessage("Client started");
             new Thread(session, "client").start();
-            System.out.println("Client started");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

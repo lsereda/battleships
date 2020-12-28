@@ -5,8 +5,9 @@ import uj.lsereda.battleships.map.Map;
 public class TerminalView implements View {
     @Override
     public void displayMaps(Map myMap, Map enemyMap) {
-        System.out.println("My map: " + myMap);
-        System.out.println("Enemy map: " + enemyMap);
+        System.out.println("My map: \n" + myMap);
+        System.out.println("Enemy map: \n" + enemyMap);
+        System.out.println("--------------------------------------------------------");
     }
 
     @Override

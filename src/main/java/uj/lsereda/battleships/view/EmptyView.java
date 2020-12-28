@@ -2,7 +2,7 @@ package uj.lsereda.battleships.view;
 
 import uj.lsereda.battleships.map.Map;
 
-public class EmptyView implements View {
+public class EmptyView implements View { //for testing purposes
     @Override
     public void displayMaps(Map myMap, Map enemyMap) {
     }

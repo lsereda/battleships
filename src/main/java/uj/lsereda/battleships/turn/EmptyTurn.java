@@ -4,7 +4,7 @@ import uj.lsereda.battleships.Session;
 
 import java.io.IOException;
 
-public class EmptyTurn implements GameTurn {
+public class EmptyTurn implements GameTurn { //for testing purposes
 
     private final Session session;
 

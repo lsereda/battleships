@@ -26,10 +26,7 @@ public class EnemyTurn implements GameTurn {
         writer.newLine();
         writer.flush();
 
-        System.out.println("My map:");
-        System.out.println(session.getMyMap());
-        System.out.println("Enemy map:");
-        System.out.println(session.getEnemyMap());
+        session.getView().displayMaps(session.getMyMap(), session.getEnemyMap());
     }
 
     private String getResponse(char x, int y) {
@@ -42,7 +39,7 @@ public class EnemyTurn implements GameTurn {
             var iterator = session.getMyMap().iterator(CellType.SHIP);
             if (!iterator.hasNext()) {
                 session.setShutdown(true);
-                System.out.println("YOU LOSE");
+                session.getView().displayMessage("YOU LOSE");
                 return String.format("%c%d WIN", x, y);
             }
             while (iterator.hasNext()) {
