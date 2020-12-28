@@ -23,9 +23,9 @@ public class WaitingForResponse implements GameTurn { //TODO implement
         var response = message.substring(3);
 
         System.out.println(String.format("%c%d %s", message.charAt(0), fieldY, response));
-        if (response.equals("HIT")) {
+        if (response.equals("HIT") || response.equals("DESTROYED")) {
             session.getEnemyMap().setCell(fieldX, fieldY, new Cell(CellType.HIT, fieldX, fieldY));
-        } else if (response.equals("MISS") || response.equals("DESTROYED")) {
+        } else if (response.equals("MISS")) {
             session.getEnemyMap().setCell(fieldX, fieldY, new Cell(CellType.MISS, fieldX, fieldY));
         } else if (response.equals("WIN")) {
             //TODO implement win process

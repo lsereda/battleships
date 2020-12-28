@@ -46,8 +46,8 @@ public class EnemyTurn implements GameTurn { //TODO implement
             while (iterator.hasNext()) {
                 var nextCell = iterator.next().getVal();
                 if (nextCell.getCellType().equals(CellType.SHIP) &&
-                    Math.abs(nextCell.getX() - cell.getX()) <= 1 &&
-                    Math.abs(nextCell.getY() - cell.getY()) <= 1) {
+                        Math.abs(nextCell.getX() - cell.getX()) <= 1 &&
+                        Math.abs(nextCell.getY() - cell.getY()) <= 1) {
                     return String.format("%c%d HIT", x, y);
                 }
             }

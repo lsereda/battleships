@@ -1,10 +1,7 @@
 package uj.lsereda.battleships;
 
 import uj.lsereda.battleships.map.Map;
-import uj.lsereda.battleships.turn.EmptyTurn;
 import uj.lsereda.battleships.turn.EnemyTurn;
-import uj.lsereda.battleships.turn.MyTurn;
-import uj.lsereda.battleships.turn.WaitingForResponse;
 import uj.lsereda.battleships.user_command_receiver.ScannerCommandReceiver;
 import uj.lsereda.battleships.view.ViewFactory;
 import uj.lsereda.battleships.view.ViewType;
