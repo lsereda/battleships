@@ -11,7 +11,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.util.Scanner;
 
-public class Server implements Runnable { //TODO
+public class Server implements Runnable {
     private static Server instance;
     private final InetAddress address;
     private final int port;
@@ -51,7 +51,7 @@ public class Server implements Runnable { //TODO
             var receiver = new ScannerCommandReceiver(new Scanner(System.in));
             var myMap = Map.fromFile(mapPath);
             var enemyMap = Map.foggedMap();
-            //TODO add rest of components
+
             var session = new Session.SessionBuilder()
                     .withSocket(acceptedSocket)
                     .withReader(bufferedReader)
@@ -62,6 +62,7 @@ public class Server implements Runnable { //TODO
                     .build();
             var state = new EnemyTurn(session);
             session.setState(state);
+
             new Thread(session, "server").start();
         } catch (Exception ex) {
             ex.printStackTrace();

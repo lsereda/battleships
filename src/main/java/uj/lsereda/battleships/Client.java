@@ -10,7 +10,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client { //TODO
+public class Client {
 
     private static Client instance;
     private final int port;
@@ -39,7 +39,7 @@ public class Client { //TODO
             var receiver = new ScannerCommandReceiver(new Scanner(System.in));
             var myMap = Map.fromFile(mapPath);
             var enemyMap = Map.foggedMap();
-            //TODO add rest of components
+
             var session = new Session.SessionBuilder()
                     .withSocket(socket)
                     .withReader(bufferedReader)
@@ -48,9 +48,9 @@ public class Client { //TODO
                     .withMyMap(myMap)
                     .withEnemyMap(enemyMap)
                     .build();
-
             var state = new MyTurn(session);
             session.setState(state);
+
             new Thread(session, "client").start();
             System.out.println("Client started");
         } catch (IOException ex) {

@@ -6,7 +6,7 @@ import uj.lsereda.battleships.map.CellType;
 
 import java.io.IOException;
 
-public class EnemyTurn implements GameTurn { //TODO implement
+public class EnemyTurn implements GameTurn {
 
     private final Session session;
 
@@ -38,11 +38,13 @@ public class EnemyTurn implements GameTurn { //TODO implement
         if (cell.getCellType().equals(CellType.WATER)) {
             return String.format("%c%d MISS", x, y);
         } else {
+            session.getMyMap().setCell(parsedX, y, new Cell(CellType.HIT, parsedX, y));
             var iterator = session.getMyMap().iterator(CellType.SHIP);
             if (!iterator.hasNext()) {
-                return String.format("%c%d WIN", x, y); //TODO implement win process
+                session.setShutdown(true);
+                System.out.println("YOU LOSE");
+                return String.format("%c%d WIN", x, y);
             }
-            session.getMyMap().setCell(parsedX, y, new Cell(CellType.HIT, parsedX, y));
             while (iterator.hasNext()) {
                 var nextCell = iterator.next().getVal();
                 if (nextCell.getCellType().equals(CellType.SHIP) &&

@@ -12,7 +12,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.Socket;
 
-public class Session implements Runnable { //TODO finish
+public class Session implements Runnable {
     private final Socket socket;
     private GameTurn state;
     private final BufferedReader reader;
@@ -20,6 +20,7 @@ public class Session implements Runnable { //TODO finish
     private final Map myMap;
     private final Map enemyMap;
     private final CommandReceiver receiver;
+    private boolean shutdown = false;
 
     private Session(SessionBuilder builder) {
         this.socket = builder.socket;
@@ -31,8 +32,8 @@ public class Session implements Runnable { //TODO finish
     }
 
     @Override
-    public void run() { //TODO implement
-        while (true) {
+    public void run() {
+        while (!shutdown) {
             try {
                 state.perform();
                 if (state instanceof MyTurn) {
@@ -50,14 +51,6 @@ public class Session implements Runnable { //TODO finish
 
     public void setState(GameTurn state) {
         this.state = state;
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
-
-    public GameTurn getState() {
-        return state;
     }
 
     public BufferedReader getReader() {
@@ -78,6 +71,10 @@ public class Session implements Runnable { //TODO finish
 
     public CommandReceiver getReceiver() {
         return receiver;
+    }
+
+    public void setShutdown(boolean shutdown) {
+        this.shutdown = shutdown;
     }
 
     public static class SessionBuilder {

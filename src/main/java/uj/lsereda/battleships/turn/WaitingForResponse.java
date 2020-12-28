@@ -6,7 +6,7 @@ import uj.lsereda.battleships.map.CellType;
 
 import java.io.IOException;
 
-public class WaitingForResponse implements GameTurn { //TODO implement
+public class WaitingForResponse implements GameTurn {
 
     private final Session session;
 
@@ -28,7 +28,8 @@ public class WaitingForResponse implements GameTurn { //TODO implement
         } else if (response.equals("MISS")) {
             session.getEnemyMap().setCell(fieldX, fieldY, new Cell(CellType.MISS, fieldX, fieldY));
         } else if (response.equals("WIN")) {
-            //TODO implement win process
+            session.setShutdown(true);
+            System.out.println("YOU WIN");
         }
 
         System.out.println("My map:");

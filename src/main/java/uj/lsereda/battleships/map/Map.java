@@ -53,7 +53,7 @@ public class Map {
         var builder = new StringBuilder();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                builder.append(cells[i][j].getCellType());
+                builder.append(cells[i][j].getCellType()).append(' ');
             }
             builder.append("\n");
         }

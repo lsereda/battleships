@@ -2,7 +2,7 @@ package uj.lsereda.battleships.map;
 
 import java.util.Objects;
 
-public class Cell implements Comparable<Cell> { //TODO
+public class Cell implements Comparable<Cell> {
 
     private final CellType cellType;
     private final int x;
@@ -61,6 +61,4 @@ public class Cell implements Comparable<Cell> { //TODO
     public Cell clone() {
         return new Cell(this);
     }
-
-
 }
