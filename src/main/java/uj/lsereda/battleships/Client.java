@@ -1,6 +1,7 @@
 package uj.lsereda.battleships;
 
 import uj.lsereda.battleships.map.Map;
+import uj.lsereda.battleships.turn.MyTurn;
 import uj.lsereda.battleships.user_command_receiver.ScannerCommandReceiver;
 import uj.lsereda.battleships.view.ViewFactory;
 import uj.lsereda.battleships.view.ViewType;
@@ -37,6 +38,7 @@ public class Client { //TODO
             var bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             var receiver = new ScannerCommandReceiver(new Scanner(System.in));
             var myMap = Map.fromFile(mapPath);
+            var enemyMap = Map.foggedMap();
             //TODO add rest of components
             var session = new Session.SessionBuilder()
                     .withSocket(socket)
@@ -44,8 +46,11 @@ public class Client { //TODO
                     .withWriter(bufferedWriter)
                     .withReceiver(receiver)
                     .withMyMap(myMap)
+                    .withEnemyMap(enemyMap)
                     .build();
 
+            var state = new MyTurn(session);
+            session.setState(state);
             new Thread(session, "client").start();
             System.out.println("Client started");
         } catch (IOException ex) {

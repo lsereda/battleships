@@ -25,12 +25,27 @@ public class Map {
         return new Map(cells);
     }
 
+    public static Map foggedMap() {
+        var cells = new Cell[10][];
+        for (int i = 0; i < 10; i++) {
+            cells[i] = new Cell[10];
+            for (int j = 0; j < 10; j++) {
+                cells[i][j] = new Cell(CellType.FOG, i, j);
+            }
+        }
+        return new Map(cells);
+    }
+
     public Cell[][] getCells() {
         return cells;
     }
 
     public MapIterator iterator(CellType cellType) {
         return new MapIterator(this, cellType);
+    }
+
+    public void setCell(int x, int y, Cell cell) {
+        cells[x][y] = cell;
     }
 
     @Override

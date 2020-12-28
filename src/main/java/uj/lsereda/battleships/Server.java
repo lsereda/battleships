@@ -1,6 +1,10 @@
 package uj.lsereda.battleships;
 
 import uj.lsereda.battleships.map.Map;
+import uj.lsereda.battleships.turn.EmptyTurn;
+import uj.lsereda.battleships.turn.EnemyTurn;
+import uj.lsereda.battleships.turn.MyTurn;
+import uj.lsereda.battleships.turn.WaitingForResponse;
 import uj.lsereda.battleships.user_command_receiver.ScannerCommandReceiver;
 import uj.lsereda.battleships.view.ViewFactory;
 import uj.lsereda.battleships.view.ViewType;
@@ -49,6 +53,7 @@ public class Server implements Runnable { //TODO
             var bufferedWriter = new BufferedWriter(new OutputStreamWriter(acceptedSocket.getOutputStream()));
             var receiver = new ScannerCommandReceiver(new Scanner(System.in));
             var myMap = Map.fromFile(mapPath);
+            var enemyMap = Map.foggedMap();
             //TODO add rest of components
             var session = new Session.SessionBuilder()
                     .withSocket(acceptedSocket)
@@ -56,7 +61,10 @@ public class Server implements Runnable { //TODO
                     .withWriter(bufferedWriter)
                     .withReceiver(receiver)
                     .withMyMap(myMap)
+                    .withEnemyMap(enemyMap)
                     .build();
+            var state = new EnemyTurn(session);
+            session.setState(state);
             new Thread(session, "server").start();
         } catch (Exception ex) {
             ex.printStackTrace();
